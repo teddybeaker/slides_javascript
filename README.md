@@ -13,8 +13,12 @@ Publikum: Backendentwickler
 ## Technisches
 Diese Präsentation funktioniert mit [reveal-md](https://github.com/webpro/reveal-md) (einer Markdown-Erweiterung von [reveal.js](https://github.com/hakimel/reveal.js/)).
 
-### reveal-md installieren
-_npm install -g reveal-md_
+### reveal-md
+Das Binary lokal installieren
+_npm install -g reveal-md@3.3.0_
+
+oder mit `npx` arbeiten
+_npx reveal-md@3.3.0_
 
 ### Präsentieren
 -   `reveal-md slides.md`

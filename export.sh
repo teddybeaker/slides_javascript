@@ -4,7 +4,7 @@ DEST_FOLDER=slides_javascript
 
 rm -rf $DEST_FOLDER
 
-reveal-md slides.md --css theme/css/font-awesome.min.css,css/bluesky-it.css --static $DEST_FOLDER
+npx reveal-md@3.3.0 slides.md --css theme/css/font-awesome.min.css,css/bluesky-it.css --static $DEST_FOLDER
 
 # copy file from theme
 cp -R theme $DEST_FOLDER/_assets
