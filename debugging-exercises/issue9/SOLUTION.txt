@@ -1,0 +1,9 @@
+Problem:
+- Developer forgot to include a required JS-files (jQuery and jquery-ui)
+- giveaways for what is missing are:
+	- $ not found -> jQuery
+	- "datepicker" not found: search for "jQuery datepicker" and download the respective library (jquery-ui)
+	- for both libraries, try newest version, if they don't work, try with older ones.
+
+Solution:
+- add missing file includes

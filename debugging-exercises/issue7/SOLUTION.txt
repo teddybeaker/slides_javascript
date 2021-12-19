@@ -1,0 +1,5 @@
+Problem:
+- countChildren() expects a list (<ul>) but gets an array of lists 
+
+Solution:
+- in call, extract the list (<ul>) from the search result before passing to countChildren()

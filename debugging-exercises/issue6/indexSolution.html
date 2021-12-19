@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+		<style>
+			.bugdescription {
+				color: darkgrey;
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<script type="text/javascript" src="someLib.js"></script>
+	
+	<body>
+	<h1 id="seoSummary"></h1>
+	<span style="display: none" class="hiddenTitle">This heading is rendered with JavaScript</span>
+	<p class="bugdescription">Page should have a header saying "This heading is rendered with JavaScript"</p>
+	<script type="text/javascript">
+		( function() {
+			/* #### ERROR ####
+				passing a list of elements instead of a string
+			 */
+			renderHeading(document.getElementsByClassName('hiddenTitle').item(0).textContent);
+		}());
+	</script>
+	</body>
+</html>

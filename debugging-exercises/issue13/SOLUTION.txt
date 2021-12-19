@@ -1,0 +1,6 @@
+Problem:
+- monkeypatch broke basic method of jQuery
+
+Solution:
+- remove monkeypatch
+- use monkeypatches only if you have no other option and are sure you don't break anything else with it

@@ -1,0 +1,5 @@
+Problem:
+- function renderHeading is called before it is defined (scripts are processed in the order they are included)
+
+Solution:
+- move include of someLib.js before <script>-tag that actually calls renderHeading()

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+		<style>
+			.bugdescription {
+				color: darkgrey;
+				font-style: italic;
+			}
+		</style>
+	</head>
+	
+	<body>
+	<h1 id="seoSummary"></h1>
+	<p class="bugdescription">Page should have a header saying "This heading is rendered with JavaScript"</p>
+	<!-- #### ERROR #### moved include of someLib.js before call of renderHeading() -->
+	<script type="text/javascript" src="someLib.js"></script>
+	<script type="text/javascript">
+		renderHeading("This heading is rendered with JavaScript");
+	</script>
+	</body>
+</html>

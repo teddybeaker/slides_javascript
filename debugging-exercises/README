@@ -1,0 +1,23 @@
+structure
+#########
+
+each bug/issue is in a separate folder.
+- Open the respective index.html in a browser to see a short description of 
+	the expected behaviour
+- Open SOLUTION.txt and any files prefixed with "Solution" to see a solution
+	of the issue
+
+
+disclaimer
+##########
+
+Please note that these samples are structured to make a training/workshop 
+easier and reproduce bugs one is likely to encounter. They are by no means to 
+be considered clean code.
+
+clean code would require at least the following:
+- putting styles and javascript code into separate files
+- using a namespaces instead of packing everything into global namespace
+
+Also, the solutions might not be the best approach to solve the task of the 
+respective issue but show one way of fixing what went wrong.

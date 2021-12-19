@@ -1,0 +1,8 @@
+Problem:
+- jQuery library is an older version than jQuery UI
+- when looking at the source files you can see that they are 9 minor versions appart
+  - jquery-1.0.js
+  - jQuery UI v1.10.4 - 2014-01-17
+
+Solution:
+- download and add right file

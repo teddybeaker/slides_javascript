@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+	<script type="text/javascript">
+		//bug description
+		alert("Problem description: loading of image takes very long");
+		/* #### ERROR ####
+			computation was started before page had finished loading. Now, we start it only after a delay
+			this is only a workaround and no proper solution since the delay (1000) is quite arbitrary;
+			- it can be too short to load the image properly before the script starts
+			- it can be way too long and we keep waiting even though we could already start calculatin
+		 */
+		setTimeout(function() {
+			var total = 0;
+			for (var i=0; i<300000000; i++) {
+				total += i * Math.random() + 7/Math.random();
+			}
+			document.getElementsByTagName('h1')[0].innerHTML = "Today's lucky number is " + total;
+		}, 1000);
+	</script>
+	</head>
+	<body>
+	<h1 id="seoSummary"></h1>
+	<img src="safari_javascript_console.png" />
+	</body>
+</html>

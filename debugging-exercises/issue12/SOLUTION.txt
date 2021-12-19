@@ -1,0 +1,6 @@
+Problem:
+- the actual bug is not important for this sample but the fact, that one can not step into the jQuery-library decently since it is minified.
+
+Solution:
+- find the un-minified version of the same library (same version number!) and add it
+- normally, it's best to have plain JS for development and minified JS for production 

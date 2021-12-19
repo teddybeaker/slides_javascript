@@ -1,0 +1,5 @@
+Problem:
+- renderHeading() expects a string as a parameter but gets a list of DOM elements
+
+Solution:
+- in call, extract the text properly from DOM before passing to renderHeading()

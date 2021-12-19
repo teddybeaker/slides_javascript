@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+	<h1 id="seoSummary"></h1>
+	<img src="safari_javascript_console.png" />
+	<script type="text/javascript">
+		
+		/* #### ERROR ####
+			computation was started before page had finished loading. Now, we start it only after page has finished loading
+		 */
+		window.onload = function() {
+			var total = 0;
+			for (var i=0; i<300000000; i++) {
+				total += i * Math.random() + 7/Math.random();
+			}
+			document.getElementsByTagName('h1')[0].innerHTML = "Today's lucky number is " + total;
+		};
+	</script>
+	</body>
+</html>

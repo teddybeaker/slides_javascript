@@ -1,0 +1,10 @@
+Problem:
+- some expensive calculation is started before all DOM (especially the image) is loaded
+
+Solution:
+- attach calculation expensive stuff to window.onload so it will be executed after the whole page has rendered (see indexSolutionShouldWork.html)
+  this should actually work but obviously doesn't for some reason I haven't figured out yet
+- delegate calculation to web worker (see indexSolutionWebWorker.html). Thanks to Patrick. Note that Chrome will have the same security concerns than in issue3; view in Firefox or deploy server
+
+Workaround (indexWorkaroundTimeout.html):
+- start the calculation after some delay so the browser has time to finish rendering the image

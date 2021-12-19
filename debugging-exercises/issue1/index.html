@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" /> 
+		<style>
+			.bugdescription {
+				color: darkgrey;
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<script type="text/javascript" src="someLib.js"></script>
+	<script type="text/javascript" src="otherLib.js"></script>
+	
+	<body>
+	<h1 id="seoSummary"></h1>
+	<p class="bugdescription">Page should have a header saying "This heading is rendered with JavaScript"</p>
+	<script type="text/javascript">
+		( function() {
+			renderHeading("This heading is rendered with JavaScript");
+		}());
+	</script>
+	</body>
+</html>

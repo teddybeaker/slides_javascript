@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<title>JavaScript Workshop</title>
+		<meta charset="utf-8" />
+		<style>
+			.bugdescription {
+				color: darkgrey;
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<!-- #### ERROR ####
+		add non-minified version of jQuery -->
+	<script type="text/javascript" src="jquery-1.10.2.js"></script>
+	<script type="text/javascript">
+		$(document).ready( function() {
+			$.ajax({
+				url: 'http://www.blusky-it.ch',
+				success: function(data) {
+					console.debug("received all data");
+				},
+				error: function(xhr, status, error) {
+					console.debug("something went wrong with call");
+				}
+			});
+		});
+	</script>
+	<body>
+	<h1></h1>
+	<p class="bugdescription">Step through jQuery's ajax function and find where exactly the call fails. Challenge is here to step through, fixing the actual error is nice to have only.</p>
+	</body>
+</html>

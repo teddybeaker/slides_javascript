@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+
+    <!-- web-worker polyfill for IE < 10
+         => uses setTimeout(...,0)
+         => results in single-threaded execution
+         => will not resolve the issue but lets us use the same code in those browsers -->
+    <script type="text/javascript" src="https://ie-web-worker.googlecode.com/svn/trunk/worker.js"></script>
+
+	<script type="text/javascript">
+		//bug description
+		alert("Problem description: loading of image takes very long");
+        // http://caniuse.com/webworkers => Yes, as soon as IE is dead...
+        new Worker("luckyNumberGenerator.js").onmessage = function (oEvent) {
+            document.getElementsByTagName('h1')[0].innerHTML = "Today's lucky number is " + oEvent.data;
+        }; // as seen here: https://developer.mozilla.org/en-US/docs/Web/Guide/Performance/Using_web_workers
+	</script>
+
+	</head>
+	<body>
+	<h1 id="seoSummary"></h1>
+	<img src="safari_javascript_console.png" />
+	</body>
+</html>

@@ -1,0 +1,6 @@
+Problem:
+- condition is falsy even though the value is something we consider valid (the number 0)
+
+Solution:
+- formulate conditions more precisely.
+- in this case: solve more cleanly by using regular expression

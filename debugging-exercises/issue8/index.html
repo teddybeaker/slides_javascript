@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+		<style>
+			.bugdescription {
+				color: darkgrey;
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<body>
+	<h1 id="seoSummary"></h1>
+	<form>
+		<label for="amount">Amount</label><input type="text" name="amount"/>
+		<span id="validationMessage" style="color: red"></span>
+		<input type="submit" value="check" name="submit"/>
+		<div id="successMessage" style="color: green"></div>
+		<p class="bugdescription">A zero is not considered valid input</p>
+	</form>
+	</body>
+	<script type="text/javascript">
+	function writeError(message) {
+		document.getElementById("validationMessage").textContent = message;
+	}
+	function resetError() {
+		document.getElementById("validationMessage").textContent = "";
+	}
+	function writeSuccess() {
+		document.getElementById("successMessage").textContent = "you entered a valid number";
+	}
+	function validateAmount(event, foo) {
+		event.preventDefault();
+		resetError();
+		var value = document.getElementsByName("amount")[0].value;
+		var numericValue = parseInt(value);
+		// if value is set and numeric
+		if (numericValue && numericValue == value) {
+			writeSuccess();
+		} else {
+			writeError("enter only digits");
+		}
+	};
+		var submit = document.getElementsByName("submit")[0];
+		submit.onclick = validateAmount;
+	</script>
+</html>

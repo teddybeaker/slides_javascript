@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8" />
+	<style>
+		.bugdescription {
+			color: darkgrey;
+			font-style: italic;
+		}
+	</style>
+</head>
+<script type="text/javascript" src="someLib.js"></script>
+
+<body>
+	<div id="menu">
+		<ul>
+			<li>
+				<a href="/Home.html">
+					<div class="activatable active_item">
+						<div>
+							HOME
+						</div>
+					</div>
+				</a>
+				<ul>
+				</ul>
+			</li>
+			<li>
+				<a href="/Software-Development.html">
+					<div class="activatable ">
+						<div>
+							SOFTWARE DEVELOPMENT
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="/Consulting.html">
+					<div class="activatable ">
+						<div>
+							CONSULTING
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="/Factory.html">
+					<div class="activatable ">
+						<div>
+							FACTORY
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="/Referenzen.html">
+					<div class="activatable ">
+						<div>
+							REFERENZEN
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="/Wir.html">
+					<div class="activatable ">
+						<div>
+							WIR
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<div></div>
+				</a>
+			</li>
+			<li>
+				<a href="/Home.html">
+					<div>
+						<img src="../../images/bluesky_logo.png" alt="bluesky logo">
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<h1>Sitemap</h1>
+	<span>found a total of <span id="linkCount"></span> links in menu</span>
+	<p class="bugdescription">The text should be "found a total of 8 links in menu"</p>
+	<script type="text/javascript">
+	( function() {
+		var nofListItems = countChildren(document.getElementsByTagName('ul').item(0));
+		document.getElementById('linkCount').innerText = nofListItems;
+	}());
+	</script>
+</body>
+</html>

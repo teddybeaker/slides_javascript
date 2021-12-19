@@ -1,0 +1,29 @@
+Problem:
+- Developer forgot to include a required library (d3)
+
+Solution:
+- add missing file include
+
+Steps to solution:
+- Error: "Uncaught ReferenceError: d3 is not defined" -> something called d3 is missing
+- looking at index.html, we see that there is quite a lot being called on that d3 variable (d3.csv, d3.select, d3.max) -> must be more than a missing variable, looks more like a missing library
+- google for "javascript d3" -> http://d3js.org/ -> find <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+-> works fine in Firefox
+-> fails in Chrome due to cross origin policy (note this happens only in our local dev setup and is not related to JavaScript anymore)
+
+Steps to solve Chrome cross origin policy
+- Error: XMLHttpRequest cannot load file:///EWorkspace/js-workshop/samples/issue3/morley.csv. Cross origin requests are only supported for HTTP.
+- make Chrome ignore policy violation
+	- close running Chrome instance
+	- open a shell (e.g. Terminal)
+	- start Chrome from shell with additional argument -–allow-file-access-from-files
+		- $ /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome  --allow-file-access-from-files
+	- open file again
+- access files through server instead of from file system
+	- deploy code and access through server (e.g. cq5)
+	- for these exercises, we don't have a server but we can easily set up one (thanks Patrick for showing me)
+		- open a shell (e.g. Terminal)
+		- change into directory of issue3 (cd path/to/workspace/samples/issue3
+		- $ python -m SimpleHTTPServer
+		- starts a simple http server, see console output for port information
+		- view page in browser (i.e. http://localhost:8000/indexSolution.html)

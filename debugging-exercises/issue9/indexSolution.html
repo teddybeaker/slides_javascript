@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Datepicker - Default functionality</title>
+	<link rel="stylesheet" href="jquery-ui.css">
+	<link rel="stylesheet" href="style.css">
+	<!-- #### ERROR ####
+		added missing imports -->
+	<script src="jquery-1.10.2.js"></script>
+	<script src="jquery-ui.js"></script>
+	<style>
+		.bugdescription {
+			color: darkgrey;
+			font-style: italic;
+		}
+	</style>
+	<script>
+	$(function() {
+		$( "#datepicker" ).datepicker();
+	});
+	</script>
+</head>
+<body>
+<p>Date: <input type="text" id="datepicker"></p>
+<p class="bugdescription">Datepicker should pop up when clicking on input</p>
+</body>
+</html>

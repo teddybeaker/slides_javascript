@@ -1,0 +1,6 @@
+Problem:
+- second script included (checkBrowser.js) messes with first one (jquery-latest-min.js)
+- in checkBrowser.js is an assignment instead of a comparison ("=" instead of "==")
+
+Solution:
+- fix comparison in checkBrowser.js

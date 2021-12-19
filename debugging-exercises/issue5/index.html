@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+	<script type="text/javascript">
+		//bug description
+		alert("Problem description: loading of image takes very long");
+		var total = 0;
+		for (var i=0; i<300000000; i++) {
+			total += i * Math.random() + 7/Math.random();
+		}
+		setTimeout(function() {
+			document.getElementsByTagName('h1')[0].innerHTML = "Today's lucky number is " + total;
+		}, 1000);
+	</script>
+	</head>
+	<body>
+	<h1 id="seoSummary"></h1>
+	<img src="safari_javascript_console.png" />
+	</body>
+</html>

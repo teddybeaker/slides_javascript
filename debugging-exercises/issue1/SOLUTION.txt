@@ -1,0 +1,6 @@
+Problem:
+- second script included (otherLib.js) messes with first one (someLib.js)
+- in otherLib.js, forgot to write "var" before "renderHeading -> polluted global namespace instead of defining variable with local scope
+
+Solution:
+- add "var", see otherLibSolution.js

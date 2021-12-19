@@ -1,0 +1,5 @@
+Problem:
+- Developer forgot to include a required JS-file (yetAnotherLib.js)
+
+Solution:
+- add missing file include

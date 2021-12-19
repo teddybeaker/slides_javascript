@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+	<head>
+		<title>JavaScript Workshop</title>
+		<meta charset="utf-8" />
+		<style>
+			.bugdescription {
+				color: darkgrey;
+				font-style: italic;
+			}
+			.square {
+				width: 100px;
+				height: 100px;
+				background-color: green;
+			}
+			#second {
+				background-color: red;
+			}
+		</style>
+	</head>
+	<script type="text/javascript" src="jquery-1.10.2.js"></script>
+	<script type="text/javascript">
+
+		/* #### ERROR ####
+			chainability is lost since we monkey-patched a basic method */
+		//fix jQuery's function since it still returns a list instead of a single element
+		/*$.fn.first = function() {
+			return this.eq( 0 )[0];
+		}*/
+
+		$(document).ready( function() {
+			$('#second').click(function() {
+				$('.square').first().hide();
+			});
+		
+		});
+	</script>
+	<body>
+	<h1></h1>
+	<p class="bugdescription">When clicking on the red square, the first green square should be hidden.</p>
+	<div id="first" class="square"></div>
+	<div id="second" class="square"></div>
+	<div id="third" class="square"></div>
+	</body>
+</html>
