@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-US">
+<head>
+	<meta name="generator" content=
+	"HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org" />
+	<title>JavaScript</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="copyright" content=
+	"Stefani Gerber, Bluesky-IT Solutions" />
+	<meta name="duration" content="15" />
+	<link rel="stylesheet" href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" media="screen, projection, print"
+	href="https://www.w3.org/Talks/Tools/Slidy2/styles/w3c-blue.css" /> 
+	<script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js" charset="utf-8" type="text/javascript">
+	</script>
+	<style type="text/css">
+	quote {
+		font-style: italic;
+	}
+	body {
+		color: #282828;
+		background-color: #F0F0F0;
+	}
+	.titleContainer {
+		margin-top: 25%;
+	}
+	div.slide.cover h1 {
+		font-size: 320%;
+		min-height: 0;
+	}
+	.titleContainer quote {
+		margin-left: 1.6em;
+	}
+	#head-logo-fallback {
+		width: 200px;
+		height: 50px;
+		margin: 1em 1em 0 0;
+	}
+	div.slide h1 {
+		margin-top: .5em;
+	}
+	pre.output {
+		color: grey;
+		border-color: lightgrey;
+	}
+	.quoteSource {
+		font-size: smaller;
+	}
+	.quoteSource a {
+		color: #282828;
+	}
+	.alignAtFooter {
+		position: absolute;
+		bottom: 20px;
+	}
+	.imagewrapper {
+		margin-right: 5%;
+		float: right;
+	}
+	</style>
+</head>
+<body>
+	<div class="background"> 
+		<img id="head-icon" alt="graphic with four colored squares"
+		src="https://www.w3.org/Talks/Tools/Slidy2/graphics/icon-blue.png" /> 
+		<img src="images/bluesky_logo.png" 
+		alt="logo of Bluesky" id="head-logo-fallback" />
+	</div> 
+
+	<div class="slide cover title first-slide">
+		<div class="titleContainer">
+			<h1>JavaScript</h1>
+			<q>the world's most misunderstood programming language</q> (Douglas Crockford)
+		</div>
+	</div>
+
+	<!-- list of contents -->
+	<div class="slide">
+		<h1>Contents</h1>
+
+		<ul class="incremental">
+			<li>Literals, Types, Functions</li>
+			<li>Modules</li>
+			<li>Pitfalls</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Douglas Crockford</h1>
+		<span class="imagewrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Douglas_Crockford.jpg/200px-Douglas_Crockford.jpg" alt="Douglas Crockford" /><br/><span class="quoteSource">source: <a href="http://www.acm.uiuc.edu/conference/2009/index.html">ACM University of Illinois</a></span></span>
+		<ul class="incremental">
+			<li>ongoing involvement in the development of JavaScript</li>
+			<li>popularized JSON</li>
+			<li>developed JSLint and JSmin</li>
+			<li>wrote <i>JavaScript: the good parts</i> (2008)</li>
+		</ul>
+		<p class="quoteSource alignAtFooter">source: <a href="https://en.wikipedia.org/wiki/Douglas_Crockford">wikipedia</a></p>
+	</div>
+	<div class="slide">
+		<h1>Literals</h1>
+		<ul class="incremental">
+			<li class="incremental">
+				<span>{} object</span>
+				<pre>var myobj = {foo: 'bar'};</pre>
+			</li>
+			<li class="incremental">
+				<span>[] array</span>
+				<pre>var myList = ['a', 1234, undefined, "foobar", null];</pre>
+			</li>
+			<li class="incremental">
+				<span>// regular expression</span>
+				<pre>var myExpr = /^\d{4,5}$/</pre>
+			</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Types</h1>
+		<ul class="incremental">
+			<li>primitives
+				<ul>
+					<li>boolean (true, false)</li>
+					<li>number (3, 1.75)</li>
+					<li>string ("foo", 'bar')</li>
+					<li>null</li>
+					<li>undefined</li>
+				</ul>
+			</li>
+			<li>Function</li>
+			<li>Object
+				<ul>
+					<li>Array</li>
+					<li>Wrappers for primitives (Boolean, Number and String)</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Prototype</h1>
+		<div class="incremental">
+			<ul class="incremental">
+				<li>JavaScript has objects, but no classes.</li>
+				<li>Every object is linked to a prototype object from which it can inherit properties.</li>
+			</ul>
+			<h2>Try not to emulate classes</h2>
+			<ul class="incremental">
+				<li><q>What matters about an object is what it can do, not what it is descended from.</q></li>
+				<li><q>The pseudoclassical form can provide comfort to programmers who are unfamiliar with JavaScript, but it also hides the true nature of the language.</q></li>
+			</ul>
+			<p class="quoteSource">Douglas Crockford</p>
+		</div>
+	</div>
+	<div class="slide">
+		<h1>Function</h1>
+		<ul class="incremental">
+			<li>first-class citizen
+				<ul class="incremental">
+					<li>pass as arguments
+						<pre>
+function myFunc() {
+	// do something
+};
+var result = someOtherFunction(myFunc);</pre>
+					</li>
+					<li>return from other functions
+<pre>
+function myFunc() {
+    return function () {
+        //do something
+    };
+}</pre>
+					</li>
+					<li>assign to variables
+<pre>var myFunc = function myFunc(){};
+var otherFunc = function (){};
+var obj = {
+	someProperty: "foobar",
+	someMethod: function() {
+		return this.someProperty;
+	}
+};</pre>
+						<pre class="output">obj.someMethod();	// prints "foobar"</pre>
+					</li>
+				</ul>
+			</li>
+			<li class="incremental">hold scope
+				<pre>
+function foobar() {
+	var foo = "bar";
+	console.log(foo);
+}</pre>
+<pre class="output">
+foobar();	// prints "bar"
+console.log(foo);	// ReferenceError: foo is not defined
+</pre>
+			</li>
+			<!-- <li class="incremental">arguments
+<pre>
+function foo() {
+	console.debug(arguments);
+}
+foo(1, "a", null); 
+</pre>
+<pre class="output">
+// prints [1, "a", null] 
+</pre>
+<pre>
+function bar(drink, numberOfDrinks) {
+	console.log("customer wants " + numberOfDrinks + " " + drink);
+	console.log(arguments);
+}
+bar("beer", 12, "a fresh salad", "world peace");
+</pre>
+<pre class="output">
+// prints "customer wants 12 beer"
+// prints ["beer", 12, "a fresh salad", "world peace"] 
+</pre>
+			</li> -->
+			<li class="incremental">anonymous function
+				<pre>function () {...};</pre>
+				<pre>
+var myFunc = function () {...};
+var result = myFunc();</pre>
+			</li>
+			<li class="incremental">immediately invoked function expression
+<pre>
+var result = function(){
+	return "foobar";
+}();</pre>
+				<pre class="output">// assigns "foobar" to var result</pre>
+			</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Scope</h1>
+		<ul class="incremental">
+			<li class="incremental">global namespace
+				<pre>var foo = "foo";</pre>
+			</li>
+			<li class="incremental">function scope
+				<pre>
+function bar() {
+	var foo = "bar";
+}</pre>
+<pre class="output">
+console.log(foo);	// ReferenceError: foo is not defined
+</pre>
+			</li>
+			<li class="incremental"><em>no</em> block scope
+<pre>
+for (var i=0; i<3; i++) {
+	console.log(i);
+}
+console.log("after loop " + i);
+</pre>
+<pre class="output">
+//prints "after loop 3"
+</pre> 
+			</li>
+			<li class="incremental">hoisting (variable declaration is pulled up to top of scope)
+<pre>
+function foo() {
+	var a = 1;
+	console.log(a); // 1
+	console.log(b); // undefined
+	console.log(c); // ReferenceError: c is not defined
+	var b = 2;
+	console.log(b); // 2
+}
+</pre>
+			</li>
+			<li class="incremental">closure (function has access to the context in which it was created)
+<pre>
+function foo() {
+	var a = 1;
+	return function() {
+		console.log(a);
+	}
+}
+var myfunc = foo();
+console.log(a);	// ReferenceError: a is not defined
+myfunc();
+// prints "1"
+</pre>
+			</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Module</h1>
+		<div class="incremental">
+			<p>different approaches, here the one using immediately invoked function expressions</p>
+			<pre>
+var myNamespace = myNamespace || {};
+myNamespace.myModule = (function (dependency1, dependency2) {
+	var privateMember = 42;
+	function privateFunction() {
+		dependency1.someFunction();
+		// do something
+	}
+	function publicFunction() {
+		privateFunction();
+		return privateMember;
+	}
+	return {
+		someFunction: publicFunction
+	};
+}(someLib, myNamespace.someUtil));
+
+var someLib = {someFunction: function() {return "in dependency";}};
+	</pre>
+	<pre class="output">
+	myNamespace.myModule.someFunction();	// print 42
+	myNamespace.myModule.privateFunction();	//TypeError: Object #&lt;Object&gt; has no method 'privateFunction'
+	console.log(myNamespace.myModule.privateMember);	// undefined
+	</pre>
+		<h2>Advantages</h2>
+		<ul class="incremental">
+			<li>closure (i.e. <em>publicFunction</em> can access <em>privateMember</em> and <em>privateFunction</em>)</li>
+			<li>protected access (<em>privateMember</em> and <em>privateFunction</em> are not accessible)</li>
+			<li>global namespace not polluted (everything is in <em>myNamespace</em>)</li>
+			<li>dependencies clearly declared (passed as parameters to module, allow for renaming)</li>
+			<li>rename publically available functions</li>
+		</ul>
+		</div>
+	</div>
+	<div class="slide">
+		<h1>Beware</h1>
+		<ul class="incremental">
+			<li class="incremental">
+				<span>missing <em>var</em> pollutes namespace</span>
+				<pre>
+function bar() {
+	var foo = "bar";
+	foobar = 123; // implicit global since we forgot "var"
+}</pre>
+<pre class="output">
+console.log(foo);	// ReferenceError: foo is not defined
+console.log(foobar); //prints 123
+</pre>
+			</li>
+			<li class="incremental">
+				<span>implicit typecasting (problematic in comparisons)</span>
+				<ul class="incremental">
+					<li><pre>0 == false</pre></li>
+					<li><pre>0 == ""</pre></li>
+					<li>use === instead of ==</li>
+				</ul>
+			</li>
+			<li>nonexisting block scope</li>
+			<li>implicit semi-colon insertion</li>
+		</ul>
+	</div>
+	<!-- <div class="slide">
+		<h1>Quotes</h1>
+		<p>I discovered that I could be a better programmer by using only the good parts and avoiding the bad parts. After all, how can you build something good out of bad parts?</p>
+		<p>In JavaScript, there is a beautiful, elegant, highliy expressive language that is buried under a steaming pile of good intensions and blunder.</p>
+		<p>The DOM is poorly specified and inconsistently implemented.</p>
+		<p>The very good ideas include functions, loose typing, dynamic objects and an expressive object literal notation. The bad ideas include a programming model based on global variables.</p>
+		<p>I find loose typing to be liberating. I don't need to form complex class hierarchies. And I never have to cast or wrestle with the type system to get the behavior that I want.</p>
+		<p>The good parts are good enough to compensate for the bad parts.</p>
+		<p>What matters about an object is what it can do, not what it is descended from.</p>
+		<p>The pseudoclassical form can provide compfort to programmers who are unfamiliar with JavaScritp, but it also hides the true nature of the language.</p>
+		<p>JavaScript's loose typing and excessive error tolerance provide little compile-time assurance of our programs' quality, so to compensate, we should code with strict discipline.</p>
+		<p>I now pay special attention to features that are sometimes useful but occasionally dangerous. Those are the worst parts because it is difficult to tell wether they are being used correctly. That is the place where bugs hide.</p>
+		<p>I use a single global variable to contain an application or library.</p><!-- jQuery -->
+	</div> -->
+
+	<!-- advanced topics -->
+	<div class="slide">
+		<h1>Advanced topics</h1>
+		<ul class="incremental">
+			<li>this</li>
+			<li>curry (partially apply a function)</li>
+			<li>call, apply
+				<ul>
+					<li>used on functions</li>
+					<li>pass this as first parameter</li>
+					<li>bound dynamically (i.e. on function call)</li>
+				</ul>
+			</li>
+			<li>bind
+				<ul>
+					<li>returns new bound funciton</li>
+					<li>function can not be used dynamically anymore</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Advanced topics cont.</h1>
+		<h2>Regular Expressions</h2>
+		<div class="incremental">
+			<h3>declaration</h3>
+			<ul>
+				<li>
+					<span>literal</span>
+					<pre>/^\d{4,5}$/</pre>
+				</li>
+				<li>
+					<span>new RegExp()</span>
+					<pre>new RegExp("^\\d{4,5}$");</pre>
+				</li>
+			</ul>
+			<h3>usage</h3>
+			<ul class="incremental">
+				<li>
+					<span>expression</span>
+					<pre>
+myExpr.exec("1234");	//-> ["1234"]
+myExpr.test("12345");	//-> true</pre>
+					</li>
+					<li>
+						<span>on strings</span>
+						<pre>
+"1234".match(/^\d{4,5}$/);		//-> ["1234"]
+"1a2345b6".replace(/\d{4,5}/, "");	//-> "1ab6"
+"1a2345b6".search(/\d{4,5}/);		//-> 2
+"1a2345b6".split(/\d{4,5}/);		//-> ["1a", "b6"]
+						</pre>
+					</li>
+				</ul>
+				<h3>remarks</h3>
+				<ul class="incremental">
+					<li>different implementations accross language processors</li>
+					<li>poor support for internationalisation</li>
+				</ul>
+			</div>
+		</div>
+		<div class="slide">
+			<h1>Advanced topics cont.</h1>
+			<div class="incremental">
+				<h2>JSON - JavaScript Object Notation</h2>
+				<ul class="incremental">
+					<li>serialize objects to strings</li>
+					<li>used for data transfer</li>
+					<li>like object literal notation, except that properties have to be quoted
+						<pre>var obj={foo: "bar", foobar: 123};</pre>
+						<pre class="output">"{"foo":"bar","foobar":123}"</pre>
+					</li>
+				</ul>
+				<h2>Exceptions</h2>
+				<pre>throw new Error("something went wrong");</pre>
+				<h2>JSLint</h2>
+				<ul>
+					<li>validates format of JavaScript</li>
+					<li>very strict -> introduction of JSHint, which allows for more configuration</li>
+				</ul>
+			</div>
+		</div>
+		<div class="slide">
+			<h1>Advanced topics cont.</h1>
+			<div class="incremental">
+				<h2>Monkey patching</h2>
+				<p>replace code at load time or at runtime</p>
+				<pre>$.fn.first</pre>
+				<pre class="output">
+function () {
+	return this.eq( 0 );
+}</pre>
+				<pre>
+$.fn.first = function () {
+	return this.eq( 0 )[0];
+}</pre>
+				<pre>$('script').first()</pre>
+				<pre class="output">
+					[&ltscript...,]
+				</pre>
+				<pre>$('script').first()</pre>
+				<pre class="output">
+					&ltscript...
+				</pre>
+			</div>
+		</div>
+
+		<div class="slide">
+		<h1>JavaScript = ECMAScript + DOM + BOM</h1>
+		<ul class="incremental">
+			<li>ECMAScript: Standard defined by ECMA</li>
+			<li>DOM: Document Object Model; representing and interacting with objects in HTML</li>
+			<li>BOM: Browser Object Model; objects exposed by the browser. there is no standard</li>
+		</ul>
+	</div>
+
+	<div class="slide">
+		<h1>window</h1>
+		<ul class="incremental">
+			<li>head object</li>
+			<li>provided by browser</li>
+			<li>contains native portions of the language</li>
+		</ul>
+	</div>
+
+	<div class="slide">
+		<h1>BOM (Browser Object Model)</h1>
+		<div class="incremental">
+			<p>Consists of the following objects</p>
+			<ul class="incremental">
+				<li>navigator</li>
+				<li>history</li>
+				<li>screen</li>
+				<li>location</li>
+				<li>document (contains the DOM)</li>
+			</ul>
+			<p>Those objects are also called host objects and are children of <em>window</em></p>
+			<p>Implementation can vary strongly between browsers</p>
+			<h2>Example: width of window</h2>
+			<pre>window.innerWidth ||
+document.documentElement.clientWidth ||
+document.body.clientWidth</pre>
+		</div>
+	</div>
+
+	
+	<div class="slide">
+		<h1>DOM (Document Object Model)</h1>
+		<div class="incremental">
+			<ul class="incremental">
+				<li><img src="images/pic_htmltree.gif"/><p class="quoteSource"><a href="http://www.w3schools.com/js/js_htmldom.asp">w3schools</a></p></li>
+				<li>is not made in JavaScript, only <em>used</em> by JavaScript</li>
+				<li><quote>The DOM is poorly specified and inconsistently implemented.</quote> (Douglas Crockford)</li>
+			</ul>
+			<h2>It provides</h2>
+			<ul class="incremental">
+				<li>methods (e.g. <em>getElementById</em>)</li>
+				<li>properties (e.g. <em>innerHTML</em>)</li>
+			</ul>
+			<p>although there is a specification, implementation still varies accross browsers</p>
+			<h2>Example: jQuery's support.getById() function</h2>
+			<pre>
+	// Support: IE<10
+	// Check if getElementById returns elements by name
+	// The broken getElementById methods don't pick up programatically-set names,
+	// so use a roundabout getElementsByName test
+	support.getById = assert(function( div ) {
+		docElem.appendChild( div ).id = expando;
+		return !doc.getElementsByName || !doc.getElementsByName( expando ).length;
+	});
+	...</pre>
+		</div>
+	</div>
+	<div class="slide">
+		<h1>jQuery</h1>
+		<div class="incremental">
+			<ul class="incremental">
+				<li>JavaScript library to simplify client-side scripting</li>
+				<li>consists of
+					<ul class="incremental">
+						<li>core</li>
+						<li>plugins</li>
+					</ul>
+				</li>
+			</ul>
+			<h2>Features</h2>
+			<ul class="incremental">
+				<li>simple element selection</li>
+				<li>chaining</li>
+				<li>levels out browser differences</li>
+			</ul>
+			<h2>jQuery object</h2>
+			<pre>$('body')</pre>
+			<p>The jQuery object behaves like an object and an array. You treat it like an object when you chain, but you can also treat it like an array chaining</p>
+			<pre>$('#message').text('An error occurred').css('color','red').fadeOut(3000);</pre>
+		</div>
+	</div>
+	</body>
+	</html>

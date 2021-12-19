@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-US">
+<head>
+	<meta name="generator" content=
+	"HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org" />
+	<title>JavaScript Modules</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="copyright" content=
+	"Stefani Gerber, Bluesky-IT Solutions" />
+	<meta name="duration" content="20" />
+	<link rel="stylesheet" href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" media="screen, projection, print"
+	href="https://www.w3.org/Talks/Tools/Slidy2/styles/w3c-blue.css" /> 
+	<script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js" charset="utf-8" type="text/javascript">
+	</script>
+	<style type="text/css">
+	em.issue {
+		font-weight: bold;
+	}
+	q {
+		font-style: italic;
+	}
+	body {
+		color: #282828;
+		background-color: #F0F0F0;
+	}
+	div.slide.cover h1 {
+		position: relative;
+		top: 400px;
+		font-size: 320%;
+	}
+	#head-logo-fallback {
+		width: 200px;
+		height: 50px;
+		margin: 1em 1em 0 0;
+	}
+	div.slide h1 {
+		margin-top: .5em;
+	}
+	img {
+		margin-left: 1em;
+	}
+	</style>
+</head>
+<body>
+	<div class="background"> 
+		<img id="head-icon" alt="graphic with four colored squares"
+		src="https://www.w3.org/Talks/Tools/Slidy2/graphics/icon-blue.png" /> 
+		<img src="images/bluesky_logo.png" 
+		alt="logo of Bluesky" id="head-logo-fallback" />
+	</div> 
+
+	<div class="slide cover title first-slide">
+		<h1>JavaScript Modules</h1>
+	</div>
+
+	<div class="slide">
+		<h1>Goals</h1>
+		<ul class="incremental">
+			<li>show one possible way</li>
+			<li>build up how it's done</li>
+			<li>explain why it is done</li>
+		</ul>
+	</div>
+
+	<!-- starting -->
+	<div class="slide">
+		<h1>Starting</h1>
+		<div class="incremental">
+			<pre>
+&lt;input type="text" id="date" name="date" /&gt;
+&lt;div class="calendar"&gt;&lt;/div&gt;</pre>
+		<br/>
+		<pre>
+function openCalendar() {
+	...
+}
+
+function writeDateToField() {
+	...
+}</pre>
+		</div>
+	</div>
+
+	<!-- wire together -->
+	<div class="slide">
+		<h1>wire together</h1>
+		<pre>
+&lt;input type="text" id="date" name="date" /&gt;
+&lt;div class="calendar"&gt;&lt;/div&gt;</pre>
+		<br/>
+		<pre>
+function openCalendar() {
+	...
+}
+
+function writeDateToField() {
+	...
+}
+
+function init() {
+	$('#date').click(openCalendar);
+	$('.calendar').click(writeDateToField);
+}
+$(document).ready(function() {
+	init();
+});
+</pre>
+	</div>
+
+	<!-- possible approach -->
+	<div class="slide">
+		<h1>clean namespace but no code reuse</h1>
+		<pre>
+&lt;input type="text" id="date" name="date" /&gt;
+&lt;div class="calendar"&gt;&lt;/div&gt;</pre>
+		<br/>
+		<pre>
+$(document).ready(function() {
+	function openCalendar() {
+		...
+	}
+	function writeDateToField() {
+		...
+	}
+	function init() {
+		$('#date').click(openCalendar);
+		$('.icon.calendar').click(writeDateToField);
+	}
+	init();
+});
+</pre>
+	</div>
+
+	<!-- namespace -->
+	<div class="slide">
+		<h1>add namespace</h1>
+		<pre>
+&lt;input type="text" id="date" name="date" /&gt;
+&lt;div class="calendar"&gt;&lt;/div&gt;</pre>
+		<br/>
+		<pre>
+var myApp = myApp || {};
+myApp.datePicker = (function () {
+
+	function openCalendar() {
+		...
+	}
+	function writeDateToField() {
+		...
+	}
+	function init() {
+		$('#date').click(openCalendar);
+		$('.calendar').click(writeDateToField);
+	}
+	return {
+		init: init
+	}
+})();
+$(document).ready(function() {
+	myApp.datepicker.init();
+});
+</pre>
+	</div>
+
+	<!-- dependencies -->
+	<div class="slide">
+		<h1>add dependencies</h1>
+		<pre>
+&lt;input type="text" id="date" name="date" /&gt;
+&lt;div class="calendar"&gt;&lt;/div&gt;</pre>
+		<br/>
+		<pre>
+var myApp = myApp || {};
+myApp.datePicker = (function ($) {
+
+	function openCalendar() {
+		...
+	}
+	function writeDateToField() {
+		...
+	}
+	function init() {
+		$('#date').click(openCalendar);
+		$('.calendar').click(writeDateToField);
+	}
+	return {
+		init: init
+	}
+})(jQuery);
+$(document).ready(function() {
+	myApp.datepicker.init();
+});
+</pre>
+	</div>
+
+	<div class="slide">
+		<h1>move JavaScript to separate file</h1>
+				<pre>
+&lt;input type="text" id="date" name="date" /&gt;
+&lt;div class="calendar"&gt;&lt;/div&gt;
+&lt;script type="text/javascript" src="myApp.datepicker.js"&gt;
+&lt;script type="text/javascript"&gt;
+
+	$(document).ready(function() {
+		myApp.datepicker.init();
+	});
+
+&lt;/script&gt;
+</pre>
+	</div>
+</body>
+</html>

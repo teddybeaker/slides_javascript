@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-US">
+<head>
+	<meta name="generator" content=
+	"HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org" />
+	<title>JavaScript Workshop</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="copyright" content=
+	"Stefani Gerber, Bluesky-IT Solutions" />
+	<meta name="duration" content="120" />
+	<link rel="stylesheet" href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" media="screen, projection, print"
+	href="https://www.w3.org/Talks/Tools/Slidy2/styles/w3c-blue.css" /> 
+	<script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js" charset="utf-8" type="text/javascript">
+	</script>
+	<style type="text/css">
+	em.issue {
+		font-weight: bold;
+	}
+	q {
+		font-style: italic;
+	}
+	body {
+		color: #282828;
+		background-color: #F0F0F0;
+	}
+	div.slide.cover h1 {
+		position: relative;
+		top: 400px;
+		font-size: 320%;
+	}
+	#head-logo-fallback {
+		width: 200px;
+		height: 50px;
+		margin: 1em 1em 0 0;
+	}
+	div.slide h1 {
+		margin-top: .5em;
+	}
+	img {
+		margin-left: 1em;
+	}
+	</style>
+</head>
+<body>
+	<div class="background"> 
+		<img id="head-icon" alt="graphic with four colored squares"
+		src="https://www.w3.org/Talks/Tools/Slidy2/graphics/icon-blue.png" /> 
+		<img src="images/bluesky_logo.png" 
+		alt="logo of Bluesky" id="head-logo-fallback" />
+	</div> 
+
+	<div class="slide cover title first-slide">
+		<h1>JavaScript Workshop</h1>
+	</div>
+
+	<div class="slide">
+		<h1>Goals</h1>
+		<ul>
+			<li>Getting used to the JavaScript console</li>
+			<li>Know most common errors/bugs</li>
+			<li>Debugging JavaScript</li>
+		</ul>
+	</div>
+
+	<!-- list of contents -->
+	<div class="slide">
+		<h1>Contents</h1>
+
+		<ul class="incremental">
+			<li>JavaScript in a Nutshell</li>
+			<li>JavaScript console</li>
+			<li>DOM manipulation</li>
+			<li>Debugging JavaScript</li>
+			<li>Debugging jQuery (Workshop 2)</li>
+		</ul>
+	</div>
+
+	<div class="slide">
+		<h1>JavaScript Console</h1>
+		<h2>Helpful when</h2>
+		<ul class="incremental">
+			<li>look for errors</li>
+			<li>debugging</li>
+			<li>develop (test snippet in environment with long deployment times)</li>
+		</ul>
+	</div>
+
+	<div class="slide">
+		<h1>JavaScript Console cont.</h1>
+		<h2>Google Chrome</h2>
+		<p>Open using <em>Menu &gt; Tools &gt; JavaScript Console</em></p>
+		<img src="images/chrome_javascript_console.png"/>
+		<p>Interactive console with autocompletion</p>
+		<img src="images/chrome_javascript_console2.png"/>
+	</div>
+
+	<div class="slide">
+		<h1>JavaScript Console cont.</h1>
+		<h2>Firefox with Firebug Plugin</h2>
+		<p>Install <a href="https://addons.mozilla.org/en-US/firefox/addon/web-developer/">Web Developer plugin</a></p>
+		<p>Open using <em>Menu &gt; Tools &gt; Web Developer &gt; Firebug &gt; Open Firebug</em>, switch to <em>Console</em> tab</p>
+		<img src="images/firefox_firebug_javascript_console.png"/>
+		<p>Interactive console with autocompletion</p>
+		<img src="images/firefox_firebug_javascript_console2.png"/>
+	</div>
+
+	<div class="slide">
+		<h1>JavaScript Console cont.</h1>
+		<h2>Safari</h2>
+		<p>Enable Develop Menu</p>
+		<img src="images/safari_enable_develop_menu.png" />
+		<p>Open using <em>Menu &gt; Develop &gt; Show Error Console</em></p>
+		<img src="images/safari_javascript_console.png"/>
+		<p>Interactive console with autocompletion</p>
+		<img src="images/safari_javascript_console2.png"/>
+	</div>
+
+	<div class="slide">
+		<h1>JavaScript Console cont.</h1>
+		<h2>Internet Explorer</h2>
+		<p>Open using <em>Settings &gt; F12 Developer Tools (or click F12)</em></p>
+		<img src="images/ie_javascript_console.png"/>
+		<p>Interactive console with autocompletion</p>
+		<img src="images/ie_javascript_console2.png"/>
+	</div>
+
+	<div class="slide">
+		<h1>Warm-up - Manipulate DOM</h1>
+		<h2>Goal</h2>
+		<p>get a feel for the console</p>
+		
+		<h2>Tasks on bluesky-it.ch</h2>
+		<p>using console, don't use jQuery (<em>jQuery</em> or <em>$</em>)</p>
+		<ul>
+			<li>remove jumper</li>
+			<li>count number of h1 headings</li>
+			<li>change color of "Willkommen bei  derBluesky IT-Solutions AG" to red</li>
+			<li>navigate from home to contact page</li>
+			<li>find browser version</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Warm-up - Manipulate DOM - Hints</h1>
+		<ul>
+			<li><pre>document.getElement[s]By[...]</pre></li>
+			<li>to get better autocomplete support, assign result of a function call to a variable
+				<pre>var foo = document.getElementById("foo");</pre>
+			</li>
+			<li>html attributes, e.g. <pre>&lt;span style="border: 1px solid grey"&gt;&lt;/span&gt;</li>
+			<li><em>document, location, history, navigator</em></li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Warm-up - Manipulate DOM - Possible Solutions</h1>
+		<ul class="incremental">
+			<li><span>remove jumper</span>
+				<pre>document.getElementById('jumper').remove()</pre>
+				<pre>document.getElementById('jumper').setAttribute("style", "visibility: hidden")</pre>
+				<pre>document.getElementById('jumper').style.display = 'none'</pre>
+			</li>
+			<li><span>count number of h1 headings</span>
+				<pre>document.getElementsByTagName('h1').length</pre>
+			</li>
+			<li><span>change color of "Willkommen bei  derBluesky IT-Solutions AG" to red</span>
+				<pre>var title = document.getElementsByClassName('title')[0];
+title.setAttribute("style", "color: red");</pre>
+			</li>
+			<li class=incremental><span>navigate from home to contact page</span>
+				<pre>location = "/Wir/Kontakt.html"</pre>
+				<pre>function getLinkByContent(searchText) {
+	var aTags = document.getElementsByTagName("a");
+
+	for (var i = 0; i < aTags.length; i++) {
+		if (aTags[i].innerText.trim() === searchText) {
+			return aTags[i];
+		}
+	}	
+}</pre>
+<pre>
+var link = getLinkByContent("KONTAKT");
+location = link.getAttribute("href");
+//or
+link.click();</pre>
+			</li>
+			<li><span>find browser version</span>
+				<pre>navigator.userAgent</pre></li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>How to debug JavaScript</h1>
+		<ul class="incremental">
+			<li class="incremental">
+				<span>using JavaScript console debugging</span><br/>
+				<img src="images/chrome_js_debugging.png"/>
+			</li>
+			<li>using debug statements <em>console.log()</em> and <em>console.debug()</em> (need access to sources)</li>
+			<li>using alert statements <em>alert();</em> (need access to sources)</li>
+		</ul>
+	</div>
+	
+	<div class="slide">
+		<h1>Exercises</h1>
+		<ul>
+			<li>check out source</li>
+			<li>each bug in a separate folder</li>
+			<li>open index.html in browser
+				<ul>
+					<li>it contains a short description what should happen if the bug weren't there</li>
+					<li>find issue using JavaScript console, element inspection etc.</li>
+				</ul>
+			</li>
+			<li>open source files in text editor and fix issue</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Excercises - Solutions</h1>
+		<h2>File includes</h2>
+		<ul>
+			<li>one included file breaks another (global namespace); <em class="issue">issue1</em></li>
+			<li>forgot to include a required file; <em class="issue">issue2</em></li>
+			<li>forgot to include a required library; <em class="issue">issue3</em></li>
+		</ul>
+		<h2>Execution order</h2>
+		<ul>
+			<li>function is called before the script where it is defined is included; <em class="issue">issue4</em></li>
+			<li>computation intensive stuff prevents image from loading on time; <em class="issue">issue5</em></li>
+		</ul>
+		<h2>Type mismatches</h2>
+		<ul>
+			<li>argument passed is an array, parameter expected is a string (related to getElementsByClassName()); <em class="issue">issue6</em></li>
+			<li>argument passed is an array, parameter expected is an object (related to getElementsByTagName()); <em class="issue">issue7</em></li>
+		</ul>
+		<h2>Casting</h2>
+		<ul>
+			<li>condition is falsy instead of false; <em class="issue">issue8</em></li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Content Workshop 2</h1>
+		<ul class="incremental">
+			<li>Recap
+				<ul class="incremental">
+					<li>Pitfalls</li>
+					<li>Issue5</li>
+				</ul>
+			</li>
+			<li>Modules</li>
+			<li>DOM</li>
+			<li>Debugging jQuery</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Exercises</h1>
+		<ul>
+			<li>check out source</li>
+			<li>each bug in a separate folder</li>
+			<li>open index.html in browser
+				<ul>
+					<li>it contains a short description what should happen if the bug weren't there</li>
+					<li>find issue using JavaScript console, element inspection etc.</li>
+					<li>search jQuery documentation, plugin repos etc.</li>
+				</ul>
+			</li>
+			<li>open source files in text editor and fix issue</li>
+		</ul>
+	</div>
+	<div class="slide">
+		<h1>Excercises 2 - Solutions</h1>
+		<div class="incremental">
+			<h2>File includes</h2>
+			<ul class="incremental">
+				<li>forgot to include a required file; <em class="issue">issue9</em></li>
+				<li>one included file breaks another (assignment instead of comparison); <em class="issue">issue10</em></li>
+			</ul>
+			<h2>Versions</h2>
+			<ul>
+				<li>included jQuery version is much older than dependent jQueryUI version; <em class="issue">issue11</em></li>
+			</ul>
+			<h2>Minification</h2>
+			<ul>
+				<li>can't step through minified JavaScript file; include normal version in order to debug step by step; <em class="issue">issue12</em></li>
+			</ul>
+			<h2>Monkeypatch</h2>
+			<ul>
+				<li>monkeypatch of basic function breaks library; <em class="issue">issue13</em></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
